@@ -13,7 +13,7 @@ class InputField extends Component {
 
   render() {
     return (
-      <div>
+      <div className='input-container'>
         <label htmlFor={this.props.id}>{this.props.label}</label>
         <input 
           type={this.props.type} 
