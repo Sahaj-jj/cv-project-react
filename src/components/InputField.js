@@ -16,10 +16,12 @@ class InputField extends Component {
       <div className='input-container'>
         <label htmlFor={this.props.id}>{this.props.label}</label>
         <input 
-          type={this.props.type} 
-          id={this.props.id} 
+          type={this.props.type}
+          id={this.props.id}
           placeholder={this.props.label} 
-          onChange={this.handleChange} />
+          value={this.props.value}
+          onChange={this.handleChange} 
+        />
       </div>
     )
   }
