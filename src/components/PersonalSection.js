@@ -6,10 +6,10 @@ class PersonalSection extends Component {
     super(props);
     this.state = {
       fields: [
-        { label: "Name", id: "name-input" },
-        { label: "Email", id: "email-input" },
-        { label: "Phone Number", id: "phone-input" },
-        { label: "Address", id: "address-input" },
+        { label: "Name", id: "name", value: '' },
+        { label: "Email", id: "email", value: '' },
+        { label: "Phone Number", id: "phone", value: '' },
+        { label: "Address", id: "address", value: '' },
       ],
     };
   }
@@ -17,21 +17,21 @@ class PersonalSection extends Component {
   handleChange = (id, value) => {
     this.setState({
       fields: this.state.fields.map(field => 
-        field.id === id ? { ...field, value: value }: field)
+        id.includes(field.id) ? { ...field, value: value }: field)
     })
   }
 
   getInputElement(index, type = "text") {
     const field = this.state.fields[index];
     if (this.props.save) {
-      return <div>{field.value}</div>
+      return <div className={field.id}>{field.value}</div>
     }
     return (
       <InputField 
-        key={field.id} 
+        key={`${field.id}-input`} 
         type={type} 
         label={field.label} 
-        id={field.id} 
+        id={`${field.id}-input`}
         value={field.value}
         onChange={this.handleChange}
       />
@@ -40,7 +40,7 @@ class PersonalSection extends Component {
 
   render() {
     return (
-      <div className="section-container">
+      <div className="personal section-container">
         <h3 className="section-heading">{this.props.name}</h3>
          <div className="section-content">
           {this.getInputElement(0)}
