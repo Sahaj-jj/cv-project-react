@@ -11,17 +11,25 @@ class InputField extends Component {
     this.props.onChange(id, value);
   }
 
+  handleFocusOut = (e) => {
+    const label = e.target.nextSibling;
+    if (e.target.value || e.target.type === "date") label.classList.add("filled");
+    else label.classList.remove("filled");
+  }
+
   render() {
+    const { type, label, id, value, onChange } = this.props;
+    let className = value || type === "date" ? "filled": null;
     return (
       <div className='input-container'>
-        <label htmlFor={this.props.id}>{this.props.label}</label>
         <input 
-          type={this.props.type}
-          id={this.props.id}
-          placeholder={this.props.label} 
-          value={this.props.value}
-          onChange={this.handleChange} 
+          type={type}
+          id={id}
+          value={value}
+          onChange={this.handleChange}
+          onBlur={this.handleFocusOut}
         />
+        <label htmlFor={id} className={className}>{label}</label>
       </div>
     )
   }
