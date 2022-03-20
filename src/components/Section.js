@@ -39,6 +39,7 @@ class Section extends Component {
           <div className="section-flex">
             <div className="date-container">
               {this.getFieldElement(fields, "from")}
+              <div> - </div>
               {this.getFieldElement(fields, "to")}
             </div>
             <div className="content-container">
@@ -52,6 +53,7 @@ class Section extends Component {
           <div className="section-flex">
             <div className="date-container">
               {this.getFieldElement(fields, "from")}
+              <div> - </div>
               {this.getFieldElement(fields, "to")}
             </div>
             <div className="content-container">
@@ -65,9 +67,11 @@ class Section extends Component {
   }
 
   getFieldElement = (fields, id) => {
+    let value = fields.find(field => field.id === id).value;
+    value = id === "from" || id === "to" ? value.slice(0, -3): value;
     return (
       <div className={id}>
-        {fields.find(field => field.id === id).value}
+        {value}
       </div>
     )
   }
