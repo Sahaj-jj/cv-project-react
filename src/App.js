@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import Section from './components/Section';
+import { RiEditBoxFill } from "react-icons/ri";
+import { RiSaveFill } from "react-icons/ri";
+import { RiDeleteBin2Fill } from "react-icons/ri";
+import { RiAddCircleFill } from "react-icons/ri";
 
 class App extends Component {
   constructor(props) {
@@ -9,22 +13,22 @@ class App extends Component {
     this.fields = {
       personal: [
         { label: "Name", id: "name", value: '' },
+        { label: "Role", id: "role", value: '' },
         { label: "Email", id: "email", value: '' },
         { label: "Phone Number", id: "phone", value: '' },
-        { label: "Address", id: "address", value: '' },
       ],
       education: [
         { label: "School Name", id: "school", value: '' },
+        { label: "Field of study", id: "field", value: '' },
         { label: "From", id: "from", value: '', type: "date" },
         { label: "To", id: "to", value: '',type: "date" },
-        { label: "Field of study", id: "field", value: '' },
       ],
       experience: [
         { label: "Position", id: "position", value: '' },
         { label: "Company", id: "company", value: '' },
         { label: "From", id: "from", value: '', type: "date" },
         { label: "To", id: "to", value: '', type: "date" },
-        { label: "Description", id: "field", value: '' },
+        { label: "Description", id: "description", value: '' },
       ]
     }
 
@@ -88,10 +92,9 @@ class App extends Component {
   renderSections = (sectionName) => {
     return this.state[sectionName].map(section => {
       return (
-        <div className="section-container">
+        <div key={section.id} className="section-container">
           <Section
             name={sectionName}
-            key={section.id}
             id={section.id}
             save={section.save}
             fields={section.fields}
@@ -100,13 +103,15 @@ class App extends Component {
           <button 
             className="edit-section" 
             onClick={() => this.handleEdit(sectionName, section.id)}>
-              Edit
+              {section.save ? < RiEditBoxFill /> : <RiSaveFill />}
           </button>
-          <button 
+          { sectionName !== "personal" && 
+            <button 
             className="delete-section"
             onClick={() => this.handleDelete(sectionName, section.id)}>
-              Delete
+              <RiDeleteBin2Fill />
           </button>
+          }
         </div>
       )
     });
@@ -121,17 +126,19 @@ class App extends Component {
         </div>
         <div className="cv-main">
           {this.renderSections("personal")}
+          <div className="section-heading">Education</div>
           {this.renderSections("education")}
           <button
             className='add-section'
             onClick={() => this.handleAdd("education")}>
-              Add
+              <RiAddCircleFill /> Add Section
           </button>
+          <div className="section-heading">Experience</div>
           {this.renderSections("experience")}
           <button
             className='add-section'
             onClick={() => this.handleAdd("experience")}>
-              Add
+              <RiAddCircleFill /> Add Section
           </button>
         </div>
       </div>
