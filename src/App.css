@@ -1,16 +1,12 @@
-.App {
-	text-align: center;
+:root {
+	--white: white;
+	--muted-white: rgb(196, 196, 196);
+	--light-gray: rgb(117, 117, 117);
 }
 
-.App-logo {
-	height: 40vmin;
-	pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-	}
+body {
+	background-color: #282c34dc;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .header {
@@ -23,15 +19,164 @@
 	color: white;
 }
 
-.App-link {
-	color: #61dafb;
+.cv-main {
+	background-color: #fff;
+	margin: 5rem auto;
+	width: 794px;
+	height: auto;
+	padding: 3rem 5rem;
 }
 
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+.section-container {
+	position: relative;
+	padding: 1rem 1rem;
+}
+
+.section-heading {
+	font-size: 1.5rem;
+	width: 100%;
+	background-color: rgba(138, 213, 248, 0.2);
+	padding: 1rem;
+	border-radius: 15px;
+	margin: 1rem auto;
+}
+
+.input-container {
+	position: relative;
+	padding: 0.7rem 0;
+	display: flex;
+}
+
+label {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-60%);
+	background-color: transparent;
+	color: var(--light-gray);
+	left: 0;
+	font-size: 1.1rem;
+	padding: 0 1rem;
+	transition: all 0.3s;
+	transform-origin: left;
+}
+
+input[type="text"],
+input[type="date"] {
+	padding: 0.5rem 1rem;
+	width: 15rem;
+	font-size: 1.1rem;
+	border: none;
+	border-radius: 5px;
+	/* outline: 1px solid black; */
+	background-color: rgb(245, 245, 245);
+}
+
+input:focus {
+	background-color: rgba(90, 127, 230, 0.203);
+	outline: none;
+}
+
+input:focus + label,
+label.filled {
+	top: -0.6rem;
+	transform: scale(0.7);
+	left: 0rem;
+}
+
+input:focus + label {
+	color: rgb(90, 127, 230);
+}
+
+/* Buttons */
+
+.edit-section,
+.delete-section {
+	position: absolute;
+	top: 1rem;
+	right: 3rem;
+	display: none;
+	font-size: 1.3rem;
+	background: none;
+	border: none;
+	opacity: 0.5;
+	cursor: pointer;
+	color: gray;
+	transition: all 0.3s;
+}
+
+.edit-section {
+	right: 5rem;
+}
+
+.edit-section:hover {
+	opacity: 1;
+	color: #282c34;
+}
+
+.delete-section:hover {
+	opacity: 1;
+	color: red;
+}
+
+.add-section {
+	color: #282c34;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
+	padding: 0.6rem 1rem;
+	border-radius: 10px;
+	transition: all 0.3s;
+	margin-left: 1rem;
+}
+
+.add-section:hover {
+	background-color: #282c3410;
+}
+
+.section-container:hover .edit-section,
+.section-container:hover .delete-section {
+	display: block;
+}
+
+/* CV elements styling */
+
+.section-container div {
+	font-size: 0.9rem;
+	line-height: 150%;
+}
+
+.section-container .section-flex {
+	display: flex;
+	gap: 1rem;
+}
+
+.section-flex > .date-container {
+	display: flex;
+	gap: 0.7rem;
+	font-weight: 600;
+}
+
+.section-flex > .content-container {
+	border-left: 1px solid rgba(0, 0, 0, 0.245);
+	padding: 0 1rem;
+}
+
+.section-container .name {
+	font-size: 4rem;
+}
+
+.section-container .role {
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.section-container .field,
+.section-container .position {
+	font-size: 1.3rem;
+}
+
+.section-container .school,
+.section-container .company {
+	font-weight: 800;
 }
