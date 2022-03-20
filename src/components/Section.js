@@ -6,8 +6,8 @@ class Section extends Component {
     super(props);
   }
 
-  handleChange = (id, value) => {
-    this.props.onChange(this.props.name, this.props.id, id, value);
+  handleChange = (fieldId, value) => {
+    this.props.onChange(this.props.name, this.props.id, fieldId, value);
   }
 
   renderInputElements() {
@@ -25,12 +25,61 @@ class Section extends Component {
     })
   }
 
+  renderElements = (sectionName) => {
+    const fields = this.props.fields;
+    switch(sectionName) {
+      case "personal": 
+        return this.props.fields.map(field => {
+          return (
+            <div className={field.id}>{field.value}</div>
+          )
+        })
+      case "education":
+        return (
+          <div className="section-flex">
+            <div className="date-container">
+              {this.getFieldElement(fields, "from")}
+              {this.getFieldElement(fields, "to")}
+            </div>
+            <div className="content-container">
+              {this.getFieldElement(fields, "field")}
+              {this.getFieldElement(fields, "school")}
+            </div>
+          </div>
+        )
+      case "experience":
+        return (
+          <div className="section-flex">
+            <div className="date-container">
+              {this.getFieldElement(fields, "from")}
+              {this.getFieldElement(fields, "to")}
+            </div>
+            <div className="content-container">
+              {this.getFieldElement(fields, "position")}
+              {this.getFieldElement(fields, "company")}
+              {this.getFieldElement(fields, "description")}
+            </div>
+          </div>
+        )
+    }
+  }
+
+  getFieldElement = (fields, id) => {
+    return (
+      <div className={id}>
+        {fields.find(field => field.id === id).value}
+      </div>
+    )
+  }
+
+
   render() {
     return (
       <div>
-        <div className="section-content">
-        {this.renderInputElements()}
-       </div>
+        { this.props.save ? 
+          this.renderElements(this.props.name) :
+          this.renderInputElements()
+        }
       </div>
     )
   }
